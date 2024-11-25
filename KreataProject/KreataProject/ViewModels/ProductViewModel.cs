@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using KreataProject.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +19,41 @@ namespace KreataProject.ViewModels
         [ObservableProperty]
         private List<string> _etelcsalad = new List<string> { "új", "épp", "öreg" };
 
+        [ObservableProperty]
+        private ObservableCollection<Product> _products = new ObservableCollection<Product>();
 
+        [ObservableProperty]
+        private Product _selectedProduct = new Product();
+
+        public ProductViewModel()
+        {
+            Product.DatumLejarat = DateTime.Now;
+        }
+
+        [RelayCommand]
+        public void DoSave(Product product)
+        {
+            Products.Add(product);
+            Product = new Product();
+            Product.DatumLejarat= DateTime.Now;
+            OnPropertyChanged(nameof(Product));
+        }
+
+        [RelayCommand]
+        public void DoNewProduct()
+        {
+            Product = new Product();
+            Product.DatumLejarat= DateTime.Now;
+            OnPropertyChanged(nameof(Product));
+        }
+
+        [RelayCommand]
+        public void DoDelete(Product product)
+        {
+            Products.Remove(product);
+            Product = new Product();
+            Product.DatumLejarat = DateTime.Now;
+            OnPropertyChanged(nameof(Product));
+        }
     }
 }

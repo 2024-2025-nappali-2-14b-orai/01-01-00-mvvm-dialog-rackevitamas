@@ -8,22 +8,22 @@ namespace KreataProject.Models
 {
     public class Product
     {
-        public Product(Guid id, string name, string csalad, string datumLejarat, int price, string oregsegiSzint)
+        public Product(Guid id, string name, string csalad, DateTime datumLejarat, int price, string oregsegiSzint)
         {
             Id = id;
             string Name = name;
             string Csalad = csalad;
-            string DatumLejarat = datumLejarat;
+            DateTime DatumLejarat = datumLejarat;
             int Price = price;
             OregsegiSzint = oregsegiSzint;  
         }
 
-        public Product(string name, string csalad, string datumLejarat, int price, string oregsegiSzint)
+        public Product(string name, string csalad, DateTime datumLejarat, int price, string oregsegiSzint)
         {
             Id = new Guid();
             string Name = name;
             string Csalad = csalad;
-            string DatumLejarat = datumLejarat;
+            DateTime DatumLejarat = datumLejarat;
             int Price = price;
             string OregsegiSzint = oregsegiSzint;
         }
@@ -33,7 +33,7 @@ namespace KreataProject.Models
             Id = new Guid();
             Name = string.Empty;
             Csalad = string.Empty;
-            DatumLejarat = string.Empty;
+            DatumLejarat = DateTime.MinValue;
             Price = 0;
             OregsegiSzint = string.Empty;
         }
@@ -41,7 +41,7 @@ namespace KreataProject.Models
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Csalad { get; set; }
-        public string DatumLejarat { get; set; }
+        public DateTime DatumLejarat { get; set; }
         public int Price { get; set; }
         public string OregsegiSzint { get; set; }
         public bool HasId => Id != Guid.Empty;
