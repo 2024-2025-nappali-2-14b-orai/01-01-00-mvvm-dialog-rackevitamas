@@ -7,7 +7,7 @@
 		xmlns:local="clr-namespace:KreataProject"
 		xmlns:viewmodel="clr-namespace:KreataProject.ViewModels"
         mc:Ignorable="d"
-        Title="Termék adatok" Height="480" Width="800">
+        Title="Termék adatok" Height="480" Width="500">
 	<Window.DataContext>
 		<viewmodel:ProductViewModel></viewmodel:ProductViewModel>
 	</Window.DataContext>
@@ -36,7 +36,7 @@
 		<Label Grid.Row="5" Grid.Column="0" Margin="0,0,0,26" Grid.RowSpan="3">Ételcsalád:</Label>
 		<Label Grid.Row="7" Grid.Column="0" Margin="0,0,0,32" Grid.RowSpan="2">Öregségi szint:</Label>
 		<StackPanel Orientation="Horizontal" Grid.Row="8" Grid.Column="2">
-			<Button Margin="0 10 2 2" HorizontalAlignment="Right" MinWidth="80"
+			<Button Margin="20 10 2 2" HorizontalAlignment="Right" MinWidth="80"
                     Command="{Binding DoNewProductCommand}"
                     >Új</Button>
 			<Button Margin="0 10 2 2" HorizontalAlignment="Right" MinWidth="80"
