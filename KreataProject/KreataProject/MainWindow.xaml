@@ -7,84 +7,155 @@
 		xmlns:local="clr-namespace:KreataProject"
 		xmlns:viewmodel="clr-namespace:KreataProject.ViewModels"
         mc:Ignorable="d"
-        Title="Termék adatok" Height="480" Width="500">
-	<Window.DataContext>
-		<viewmodel:ProductViewModel></viewmodel:ProductViewModel>
-	</Window.DataContext>
-	<Grid Margin="5 5 5 5">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="Auto"></ColumnDefinition>
-			<ColumnDefinition Width="300"></ColumnDefinition>
-		</Grid.ColumnDefinitions>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"></RowDefinition>
-			<RowDefinition Height="Auto"></RowDefinition>
-			<RowDefinition Height="Auto"></RowDefinition>
-			<RowDefinition Height="Auto"></RowDefinition>
-			<RowDefinition Height="Auto"></RowDefinition>
-			<RowDefinition Height="Auto"></RowDefinition>
-			<RowDefinition Height="Auto"></RowDefinition>
-			<RowDefinition Height="Auto"></RowDefinition>
-			<RowDefinition Height="Auto"></RowDefinition>
-			<RowDefinition Height="*"></RowDefinition>
-		</Grid.RowDefinitions>
-		<Label Grid.Row="0" HorizontalAlignment="Left" Grid.Column="1" Margin="49,0,0,3">Termék adatok</Label>
-		<Label Grid.Row="1" Grid.Column="0" Margin="0,0,0,26" Grid.RowSpan="2">Termék név:</Label>
-		<Label Grid.Row="2" Grid.Column="0" Margin="0,0,0,28" Grid.RowSpan="2">Fajta:</Label>
-		<Label Grid.Row="3" Grid.Column="0" Margin="0,0,0,26" Grid.RowSpan="2">Szavatossági lejárat:</Label>
-		<Label Grid.Row="4" Grid.Column="0" Margin="0,0,0,29" Grid.RowSpan="2">Ár (Ft):</Label>
-		<Label Grid.Row="5" Grid.Column="0" Margin="0,0,0,26" Grid.RowSpan="3">Ételcsalád:</Label>
-		<Label Grid.Row="7" Grid.Column="0" Margin="0,0,0,32" Grid.RowSpan="2">Öregségi szint:</Label>
-		<StackPanel Orientation="Horizontal" Grid.Row="8" Grid.Column="2">
-			<Button Margin="20 10 2 2" HorizontalAlignment="Right" MinWidth="80"
+        Title="Termék adatok"
+        Height="480"
+        Width="500"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ImageBrush x:Key="Models" ImageSource="/Models/Close_MouseOver.png" Stretch="None"/>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="CloseButton" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Models}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Window.DataContext>
+        <viewmodel:ProductViewModel></viewmodel:ProductViewModel>
+    </Window.DataContext>
+
+    <Border CornerRadius="30" BorderThickness="5">
+        <Border CornerRadius="10" BorderThickness="8">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#F0EB36" Offset="0.0"/>
+                    <GradientStop Color="#73C269" Offset="0.5"/>
+                    <GradientStop Color="#1E91A5" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+
+
+            <Grid Margin="5 5 5 5">
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#F0EB36" Offset="0.0"/>
+                        <GradientStop Color="#73C269" Offset="0.5"/>
+                        <GradientStop Color="#1E91A5" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="300"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" HorizontalAlignment="Left" Grid.Column="1" Margin="49,0,0,3">Termék adatok</Label>
+                <Button Style="{DynamicResource CloseButton}" Content="" BorderThickness="0" BorderBrush="Transparent" Grid.Row="0" HorizontalAlignment="Left" Grid.Column="1" Width="36" Margin="307,0,0,26" Grid.RowSpan="2" Click="Button_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/Models/power-button.png" Stretch="None"/>
+                    </Button.Background>
+                </Button>
+                <Label Grid.Row="1" Grid.Column="0" Margin="0,0,0,26" Grid.RowSpan="2">Termék név:</Label>
+                <Label Grid.Row="2" Grid.Column="0" Margin="0,0,0,28" Grid.RowSpan="2">Fajta:</Label>
+                <Label Grid.Row="3" Grid.Column="0" Margin="0,0,0,26" Grid.RowSpan="2">Szavatossági lejárat:</Label>
+                <Label Grid.Row="4" Grid.Column="0" Margin="0,0,0,29" Grid.RowSpan="2">Ár (Ft):</Label>
+                <Label Grid.Row="5" Grid.Column="0" Margin="0,0,0,26" Grid.RowSpan="3">Ételcsalád:</Label>
+                <Label Grid.Row="7" Grid.Column="0" Margin="0,0,0,32" Grid.RowSpan="2">Öregségi szint:</Label>
+                <StackPanel Orientation="Horizontal" Grid.Row="8" Grid.Column="2">
+                    <Button Margin="20 10 2 2" HorizontalAlignment="Right" MinWidth="80"
                     Command="{Binding DoNewProductCommand}"
                     >Új</Button>
-			<Button Margin="0 10 2 2" HorizontalAlignment="Right" MinWidth="80"
+                    <Button Margin="0 10 2 2" HorizontalAlignment="Right" MinWidth="80"
                     Command="{Binding DoSaveCommand}"
                     CommandParameter="{Binding Product}"
                     >Mentés</Button>
-			<Button Margin="0 10 2 2" HorizontalAlignment="Right" MinWidth="80"
+                    <Button Margin="0 10 2 2" HorizontalAlignment="Right" MinWidth="80"
                     Command="{Binding DoDeleteCommand}"
                     CommandParameter="{Binding Product}"
                     >Törlés</Button>
-		</StackPanel>
-		<TextBox Grid.Row="1" Grid.Column="1" Margin="2,2,2,2" Padding="0 2" Text="{Binding Product.Name}"></TextBox>
-		<TextBox Grid.Row="2" Grid.Column="1" Margin="2,2,2,2" Padding="0 2" Text="{Binding Product.Csalad}"></TextBox>
-		<DatePicker Grid.Row="3" Grid.Column="1" Margin="2,2,2,2" SelectedDate="{Binding Product.DatumLejarat}"></DatePicker>
-		<xwpftk:IntegerUpDown Grid.Row="4" Grid.Column="1" Margin="2,2,100,1" Minimum="5" Maximum="25000" Value="{Binding Product.Price}"/>
-		<StackPanel Grid.Row="5" Grid.ColumnSpan="2" Margin="115,0,0,50" Grid.RowSpan="3">
-			<RadioButton GroupName="termék" Margin="2 4 2 2">Innivaló</RadioButton>
-			<RadioButton GroupName="termék" Margin="2 4 2 2">Ennivaló</RadioButton>
-		</StackPanel>
-		<ComboBox Grid.Row="7" Grid.Column="1" Margin="2,2,2,2"
+                </StackPanel>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="2,2,2,2" Padding="0 2" Text="{Binding Product.Name}"></TextBox>
+                <TextBox Grid.Row="2" Grid.Column="1" Margin="2,2,2,2" Padding="0 2" Text="{Binding Product.Csalad}"></TextBox>
+                <DatePicker Grid.Row="3" Grid.Column="1" Margin="2,2,2,2" SelectedDate="{Binding Product.DatumLejarat}"></DatePicker>
+                <xwpftk:IntegerUpDown Grid.Row="4" Grid.Column="1" Margin="2,2,100,1" Minimum="5" Maximum="25000" Value="{Binding Product.Price}"/>
+                <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Margin="115,0,0,50" Grid.RowSpan="3">
+                    <RadioButton GroupName="termék" Margin="2 4 2 2">Innivaló</RadioButton>
+                    <RadioButton GroupName="termék" Margin="2 4 2 2">Ennivaló</RadioButton>
+                </StackPanel>
+                <ComboBox Grid.Row="7" Grid.Column="1" Margin="2,2,2,2"
             ItemsSource="{Binding Etelcsalad}"
             SelectedItem="{Binding Product.OregsegiSzint}"
             SelectedIndex="0">
-		</ComboBox>
-		<GroupBox Grid.Row="9" Grid.ColumnSpan="2">
-			<StackPanel Grid.Row="8" Grid.ColumnSpan="2" Margin="2 10 2 2">
-				<StackPanel Orientation="Horizontal">
-					<Label>Termék név:</Label>
-					<Label Content="{Binding Product.Name}"></Label>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal">
-					<Label>Fajta:</Label>
-					<Label Content="{Binding Product.Csalad}"></Label>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal">
-					<Label>Szavatossági lejárat:</Label>
-					<Label Content="{Binding Product.DatumLejarat}"></Label>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal">
-					<Label>Ételcsalád és ár:</Label>
-					<Label Content="{Binding Product.Csalad}"></Label>
-					<Label Content="{Binding Student.Price}"></Label>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal">
-					<Label>Öregési szint:</Label>
-					<Label Content="{Binding Product.OregsegiSzint}"></Label>
-				</StackPanel>
-			</StackPanel>
-		</GroupBox>
-	</Grid>
+                </ComboBox>
+                <ListBox Grid.Row="9"
+                 Grid.ColumnSpan="2" 
+                 Margin="2 2 2 2"
+                 ItemsSource="{Binding Products}"
+                 SelectedItem="{Binding Product}"
+         />
+            </Grid>
+        </Border>
+    </Border>
 </Window>
