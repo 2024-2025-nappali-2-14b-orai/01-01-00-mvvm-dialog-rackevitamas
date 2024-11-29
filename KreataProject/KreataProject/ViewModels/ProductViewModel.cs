@@ -7,13 +7,13 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace KreataProject.ViewModels
 {
     public partial class ProductViewModel : ObservableObject
     {
         [ObservableProperty]
-
         private Product _product = new Product();
 
         [ObservableProperty]
@@ -33,9 +33,16 @@ namespace KreataProject.ViewModels
         [RelayCommand]
         public void DoSave(Product product)
         {
+            if (Products.Any(p => p.Name == product.Name && p.Csalad == product.Csalad && p.DatumLejarat == product.DatumLejarat))
+            {
+                MessageBox.Show("Hiba: A termék már szerepel a listában.", "Termék Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
+                return; 
+            }
+
             Products.Add(product);
+
             Product = new Product();
-            Product.DatumLejarat= DateTime.Now;
+            Product.DatumLejarat = DateTime.Now;
             OnPropertyChanged(nameof(Product));
         }
 
@@ -43,7 +50,7 @@ namespace KreataProject.ViewModels
         public void DoNewProduct()
         {
             Product = new Product();
-            Product.DatumLejarat= DateTime.Now;
+            Product.DatumLejarat = DateTime.Now;
             OnPropertyChanged(nameof(Product));
         }
 
@@ -55,5 +62,5 @@ namespace KreataProject.ViewModels
             Product.DatumLejarat = DateTime.Now;
             OnPropertyChanged(nameof(Product));
         }
+        }
     }
-}

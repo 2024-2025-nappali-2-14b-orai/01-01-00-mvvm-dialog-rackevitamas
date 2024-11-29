@@ -15,7 +15,8 @@
         Background="Transparent"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
-        <ImageBrush x:Key="Models" ImageSource="/Models/Close_MouseOver.png" Stretch="None"/>
+        <FontFamily x:Key="ModernFont">Segoe UI</FontFamily>
+        <ImageBrush x:Key="Models" ImageSource="J:\Desktop\01-01-00-mvvm-dialog-rackevitamas\KreataProject\KreataProject\Models\close_mouseover.png" Stretch="None"/>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>
@@ -25,6 +26,11 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="MyBorderStyle" TargetType="Border">
+      <Setter Property="BorderBrush" Value="White" />
+      <Setter Property="BorderThickness" Value="2" />
+      <Setter Property="CornerRadius" Value="3" />
+</Style>
         <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
         <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
         <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
@@ -114,7 +120,7 @@
                 <Label Grid.Row="0" HorizontalAlignment="Left" Grid.Column="1" Margin="49,0,0,3">Termék adatok</Label>
                 <Button Style="{DynamicResource CloseButton}" Content="" BorderThickness="0" BorderBrush="Transparent" Grid.Row="0" HorizontalAlignment="Left" Grid.Column="1" Width="36" Margin="307,0,0,26" Grid.RowSpan="2" Click="Button_Click">
                     <Button.Background>
-                        <ImageBrush ImageSource="/Models/power-button.png" Stretch="None"/>
+                        <ImageBrush ImageSource="J:\Desktop\01-01-00-mvvm-dialog-rackevitamas\KreataProject\KreataProject\Models\power-button.png" Stretch="None"/>
                     </Button.Background>
                 </Button>
                 <Label Grid.Row="1" Grid.Column="0" Margin="0,0,0,26" Grid.RowSpan="2">Termék név:</Label>
@@ -123,7 +129,7 @@
                 <Label Grid.Row="4" Grid.Column="0" Margin="0,0,0,29" Grid.RowSpan="2">Ár (Ft):</Label>
                 <Label Grid.Row="5" Grid.Column="0" Margin="0,0,0,26" Grid.RowSpan="3">Ételcsalád:</Label>
                 <Label Grid.Row="7" Grid.Column="0" Margin="0,0,0,32" Grid.RowSpan="2">Öregségi szint:</Label>
-                <StackPanel Orientation="Horizontal" Grid.Row="8" Grid.Column="2">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="8" Grid.ColumnSpan="2">
                     <Button Margin="20 10 2 2" HorizontalAlignment="Right" MinWidth="80"
                     Command="{Binding DoNewProductCommand}"
                     >Új</Button>
